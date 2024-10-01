@@ -1,0 +1,3 @@
+value={"Food"}>Food</MenuItem>
+            <MenuItem value={"Drink Deposit"}>Getränk mit Pfand</MenuItem>
+            <MenuItem value={"Non-Food"}>NonFood</MenuItem>

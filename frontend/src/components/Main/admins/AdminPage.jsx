@@ -3,25 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
 
 export default function AdminPage(){
-   /* function handleOnClick(e){
-            const [buttonValue, setButtonValue] = useState();
-            setButtonValue(e.target.value);
-            console.log(buttonValue)
-    }
-    
-    
 
-    /*const navigate= useNavigate();
-    useEffect(()=>{
-        if (buttonValue =="newProduct"){
-            console.log("navigate to /newproduct")
-            navigate("/newproduct")
-        }
-        else{
-            console.log("No Button value")
-        }
-        
-    },[buttonValue])*/
 
     return(
         <Box sx={{

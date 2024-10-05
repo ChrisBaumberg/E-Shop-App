@@ -12,7 +12,8 @@ export default function Headline({size, companyLogo}){
             justifyContent: "start",
             gap: "10px",
             marginBottom: "25px",
-            backgroundColor: "green"
+            backgroundColor: "green",
+            height: "50px"
     }}>
         <Box sx={{
             display: "flex"
@@ -29,10 +30,10 @@ export default function Headline({size, companyLogo}){
             paddingLeft: "10px",
             width: "100%"
         }}>
-        <Searchbar sx={{
+        {/*<Searchbar sx={{
             height: "100%",
             marginLeft: "-200px"
-        }}/>
+        }}/>*/}
         </Box>
     
 </Box>

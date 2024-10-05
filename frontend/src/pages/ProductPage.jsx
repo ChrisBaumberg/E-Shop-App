@@ -1,17 +1,23 @@
 import { Box, Button } from "@mui/material";
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Fragment, useEffect, useState } from "react";
+import {getProductsFromBackend} from "../utils/AjaxHandler";
+import ProductCard from "../components/parts/cards/ProductCard";
+import {v4 as uuidv4} from "uuid";
+import { initialProducts } from "../data/productsData";
 
 
-export default function ProductPage({title, imageUrl, description, price, category, size, comparePrice, productSize
-}){
- 
-    if (category == "Drink desposit"){
-        var desposit = "(zzgl. Pfand: €0.25)"
-    }
-    else{
-        var desposit= ""
-    }
+export default function ProductPage(){
+    const [products, setProducts] = useState(
+        initialProducts
+    );
+
+        useEffect(()=>{
+            getProductsFromBackend(setProducts);
+        },[])
+  
+    
     return(
         <>
     
@@ -29,48 +35,20 @@ export default function ProductPage({title, imageUrl, description, price, catego
             //border: "1px solid black" //*1
         }}>
 
-            {/* Produktbild */}
-            <Box sx={{
-                width: "100%",
-                height: "100%",
-                
-            }}>
-            <img src={imageUrl} style={{
-                display: "flex",
-                flex: 1,
-                width: "100%",
-                height: "100%",
-                justifySelf: "center",
-                borderRadius: "10px",
-                boxShadow:"1px 1px 10px 1px rgb(73, 74, 133)",//*2
-                border: "1px solid black",//*2
-                
-            }}
-            alt="Produktbild"/>
-            </Box>
+           
                 <Box sx={{
                     height: "100%",
                     textAlign: "center",
                     fontFamily: "Arial",
                     flex: 1,                }}
                >
-               <h2>{title}</h2>
-               {productSize}{size}
-                </Box>
-                
-                <Box sx={{
-                    height: "80%",
-                    color: "red",
-                    flex: 1,
-                    marginTop: "10px",
-                    marginBottom:"5px",
-                    //borderTop: "1px solid red", //*1
-                  // backgroundColor: "orange",
-                    textAlign: "center"
-                    
-                }}>
-                     {price} <span style={{ fontSize: "12px"}}>{desposit}</span> <br/>
-                    1{size}: {comparePrice}
+                {products.map((product)=>{
+                    return(
+                        <Fragment key={product.id}>
+                            <ProductCard id={product.id} pictureUrl={product.pictureUrl} title={product.title} description={product.description} price={product.price} size={product.size} comparePrice={product.comparePrice} productSize={product.productSize} category={product.category} despositValue={product.despositValue}/>
+                        </Fragment>
+                    )
+                })}
                     
                 </Box>
             

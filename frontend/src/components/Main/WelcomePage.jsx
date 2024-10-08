@@ -1,13 +1,15 @@
 import { Box } from "@mui/material";
 import Headline from "../parts/header/Headline";
 import { useEffect, useState } from "react";
+import { getProductsFromBackend } from "../../utils/AjaxHandler";
+import {initialProducts } from "../../data/productsData"; 
 
 
 
 export function WelcomePage(){
     /* company as string - example: "company" */
     const company = "company"
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([initialProducts]);
     useEffect (()=>{
         getProductsFromBackend(setProducts);
     },[])

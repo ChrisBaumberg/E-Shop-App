@@ -1,5 +1,5 @@
 {
-  "name": "brainy-bunch-social-app",
+  "name": "e-shop-app",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,10 @@
   "description": "",
   "dependencies": {
     "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mongoose": "^8.7.0",
     "react": "^18.3.1",
     "react-router-dom": "^6.26.0",
     "react-toastify": "^10.0.5",

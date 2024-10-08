@@ -4,12 +4,10 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { useState, useRef } from "react";
 
 
-export default function ProductCard({title, imageUrl, description, price, category, size, comparePrice, productSize
+export default function ProductCard({title, imageUrl, description, price, category, size, comparePrice, productSize, despositValue
 }){
+
     
-    if (category == "Drink desposit"){
-        var desposit = "(zzgl. Pfand: €0.25)"
-    }
     var [input, setInput] = useState()
     
     function handleAddClick(){
@@ -18,7 +16,7 @@ export default function ProductCard({title, imageUrl, description, price, catego
         
         if(input < 1 || input > 15 ||  ! Number.isInteger(input) ){
  
-            var alertMessage = "Bitte eine ganze Zahl zwischen 1 und 15 eingeben!"
+            var alertMessage = "Bitte eine ganze Zahl (Integer) zwischen 1 und 15 eingeben!"
             alert(alertMessage)
    
         }
@@ -39,7 +37,7 @@ export default function ProductCard({title, imageUrl, description, price, catego
                 height: "100%",
                 display:"flex", justifyContent: "center", alignItems: "center"
             }}>
-                <img src={"../public/img/Coca-Cola_klein.jpg"} alt= "Produktbild" style={{height: "420px", width: "420px",}}></img>
+                <img src={imageUrl} alt= "Produktbild" style={{height: "420px", width: "420px",}}></img>
             </Box>
             <Box sx={{
                 display: "grid",
@@ -63,8 +61,8 @@ export default function ProductCard({title, imageUrl, description, price, catego
                     textAlign: "start"
                 }}>
                     Größe: {productSize}{size}<br/>
-                    <span style={{fontSize:"24px"}}>{price} €</span> {desposit}<br/>
-                    ({comparePrice} €/{size})
+                    <span style={{fontSize:"24px"}}>{price} €</span> <br/><span style={{fontSize: "12px"}}>{despositValue}</span><br/>
+                    <span style={{fontSize: "12px"}}>({comparePrice} €/{size})</span>
                     <br/>
                     <span style={{fontSize:"12px"}}>inkl. 19% MwSt., zzgl. Versandkosten</span> {/* optional */}
                 </Box>

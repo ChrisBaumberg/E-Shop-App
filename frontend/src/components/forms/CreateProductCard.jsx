@@ -1,12 +1,10 @@
 import { Box,  TextField, InputLabel, MenuItem, Button } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {styled} from "@mui/material/styles"
-import InputAdornment from "@mui/material/InputAdornment";
-import Dropdown from 'react-dropdown';
-import Select from "react-select";
+
 import { useCallback, useRef, useState } from "react";
-import CreateNewCategory from "./CreateNewCategory";
-import { Link } from "react-router-dom";
+import ProductCard from "../parts/cards/ProductCard";
+
 
 
 export default function CreateProductCard(){
@@ -18,6 +16,7 @@ export default function CreateProductCard(){
     const [price, setPrice] = useState();
     const [comparePrice, setComparePrice] = useState();
     const [size, setSize] = useState();
+    const [despositValue, setDespositValue] = useState("");
     const formRef = useRef();
     
     const getProductInput = async ()=>{
@@ -31,6 +30,7 @@ export default function CreateProductCard(){
         const productComparePrice = productRef.comparablePrice.value;
         const productSizeIndicator = productRef.sizeIndicator.value;
         const productCategory = productRef.categoryName.value;
+        const productDesposit = productRef.despositValue.value;
         setTitle(productTitle);
         setDescription(productDescription);
         setProductSize(productSizeValue);
@@ -39,9 +39,13 @@ export default function CreateProductCard(){
         setSize(productSizeIndicator);
         setCategory(productCategory);
         setPicture(productImg);
+        setDespositValue(productDesposit);
         
     }
- 
+    const handleAddClick = (e)=>{
+        e.preventDefault();
+        getProductInput();
+    }
   
     const VisuallyHiddenInput = styled ("input")({
         clip: "rect(0 0 0 0)",
@@ -57,13 +61,23 @@ export default function CreateProductCard(){
    
 
     return(
-       <Box 
+        <Box sx={{
+            display:"grid",
+            gridTemplateRows: "10% 80% 10%"
+        }}>
+            <h2 style={{textAlign:"center", width: "100%", height: "50px", borderRadius: "5px", border: "1px solid black",alignContent: "center", backgroundColor: "yellow"}}>Neues Produkt</h2>
+        <Box sx={{
+            width: "100%",
+            display: "grid",
+            gridTemplateColumns: "25% 75%"
+        }}>     
+        <Box 
        component="form"
         ref={formRef}
       
        sx={{
         height: "100%",
-        width: "400px",
+        width: "100%",
         bgcolor: "red",
         display: "flex",
         flexFlow: "column nowrap",
@@ -75,7 +89,7 @@ export default function CreateProductCard(){
         alignItems: "center",
     
        }}>
-        <h2 style={{textAlign:"center", width: "100%", height: "50px", borderRadius: "5px", border: "1px solid black",alignContent: "center", backgroundColor: "yellow"}}>Neues Produkt</h2>
+        
         <Button component="label" style={{color: "black", backgroundColor: "orange"}}
         startIcon={<CloudUploadIcon/>}>
             Upload file
@@ -136,8 +150,79 @@ export default function CreateProductCard(){
       >
 
       </TextField>
-      
-        
+     <TextField sx={{
+
+      }}
+        label = "Pfand"
+        name="despositValue"
+        placeholder="Pfand"
+        required></TextField>
+       
+       </Box> 
+       {/* Vorschau ProductCard */}
+       <Box sx={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgb(120, 20, 20, 0.8)",
+            display: "grid",
+            gridTemplateColumns: "50% 50%",
+            border: "1px solid black",
+            borderRadius: "10px"
+        }}>
+            <Box sx={{
+              
+                backgroundColor: "yellowgreen",
+                height: "100%",
+                display:"flex", justifyContent: "center", alignItems: "center"
+            }}>
+                <img src={picture} alt= "Produktbild" style={{height: "420px", width: "420px",}}></img>
+            </Box>
+            <Box sx={{
+                display: "grid",
+                gridTemplateRows: "20% 10% 20% 10% 40%",
+                backgroundColor: "yellow",
+                paddingLeft: "20px",
+                //color: "rgb(66, 135, 245)"
+            }}>
+                <Box sx={{
+                    textAlign: "start"
+                }}>
+                    <h1>{title}</h1>
+                </Box>
+                <Box sx={{
+                    textAlign: "start",
+                    color: "blueViolet"
+                }}>
+                    {description}
+                    </Box>
+                <Box sx={{
+                    textAlign: "start"
+                }}>
+                    Größe: {productSize}{size}<br/>
+                    <span style={{fontSize:"24px"}}>{price} €</span> <br/><span style={{fontSize: "12px"}}>{despositValue}</span><br/>
+                    <span style={{fontSize: "12px"}}>({comparePrice} €/{size})</span>
+                    <br/>
+                    <span style={{fontSize:"12px"}}>inkl. 19% MwSt., zzgl. Versandkosten</span> {/* optional */}
+                </Box>
+                <Box sx={{
+                    
+                }}>
+                    <input type="number" id="productCount" style={{width: "56px", }} min= "1" max= "15" placeholder={1} onInput={e => setInput(e.target.value)}></input> 
+                    <Button sx={{
+                        width: "250px", backgroundColor: "red", color: "yellow", marginLeft: "20px"
+                    }}>In den Warenkorb</Button>
+                </Box>
+                <Box>
+                     {/* Placeholder */}
+                </Box>
+            </Box>
+        </Box>
+       </Box>
+       <Box sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "10px"
+       }}>
         <Button sx={{
             border: "1px solid black",
             borderRadius: "20px",
@@ -147,7 +232,17 @@ export default function CreateProductCard(){
             marginLeft: "5px",
             width: "230px",
        
-        }} onClick={getProductInput}>Hinzufügen</Button>
+        }} >Übernehmen</Button>
+       <Button sx={{
+            border: "1px solid black",
+            borderRadius: "20px",
+            backgroundColor: "green",
+            color: "yellow",
+            marginBottom: "5px",
+            marginLeft: "5px",
+            width: "230px",
+       
+        }} onClick={handleAddClick}>Vorschau</Button>
        <Button type="Reset" sx={{
             border: "1px solid black",
             borderRadius: "20px",
@@ -167,6 +262,8 @@ export default function CreateProductCard(){
             marginLeft: "5px",
             width: "230px"
         }}>Abbrechen</Button>
-       </Box> 
+        </Box>
+       </Box>
+  
     )
 }

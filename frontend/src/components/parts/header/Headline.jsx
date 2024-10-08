@@ -4,7 +4,7 @@ import Searchbar from "../bars/Searchbar";
 
 {/*Headline */}
 
-export default function Headline({size, companyLogo}){
+export default function Headline({size}){
 
     return(
         <Box sx={{
@@ -12,12 +12,17 @@ export default function Headline({size, companyLogo}){
             justifyContent: "start",
             gap: "10px",
             marginBottom: "25px",
-            backgroundColor: "green"
+            backgroundColor: "green",
+            height: "48px"
+
     }}>
         <Box sx={{
-            display: "flex"
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: "5px"
         }} >
-        <img src = {companyLogo} alt={"Firmenlogo"}/>
+        <img src = {""} alt={"Firmenlogo"}/>
     </Box>
     <Box sx={{
         display:"flex",
@@ -29,10 +34,10 @@ export default function Headline({size, companyLogo}){
             paddingLeft: "10px",
             width: "100%"
         }}>
-        <Searchbar sx={{
+        {/*<Searchbar sx={{
             height: "100%",
             marginLeft: "-200px"
-        }}/>
+        }}/>*/}
         </Box>
     
 </Box>

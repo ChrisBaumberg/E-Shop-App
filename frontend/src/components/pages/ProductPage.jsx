@@ -5,13 +5,6 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function ProductPage({title, imageUrl, description, price, category, size, comparePrice, productSize
 }){
- 
-    if (category == "Drink desposit"){
-        var desposit = "(zzgl. Pfand: €0.25)"
-    }
-    else{
-        var desposit= ""
-    }
     return(
         <>
     

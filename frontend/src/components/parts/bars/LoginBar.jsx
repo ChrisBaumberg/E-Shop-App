@@ -3,10 +3,24 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Button } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from "@mui/icons-material/Login";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function LoginBar(){
-    
+
+export default function LoginBar({isLoggedin}){
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    useEffect(()=>{
+        const token = localStorage.getItem("token");
+        if (token){
+          setLoggedIn(true);
+        }
+      },[])
+      const handleLogout = () =>{
+        setLoggedIn(false);
+        console.log("Logged out")
+      }
+      const handleLogin = () =>{
+        setLoggedIn(true);
+      }
     return(
         <>
         
@@ -33,7 +47,7 @@ export default function LoginBar(){
                 
             }}>
                 
-        
+            {/*<Link to="/login"*/}
                 <LoginIcon sx={{
                 display: "block",
                 width: "32px",
@@ -43,9 +57,14 @@ export default function LoginBar(){
                 float: "left",
                 marginRight: "5px",
                 borderRadius: "30%",
-                backgroundColor: "green"
+                backgroundColor: "green",
+                cursor: "pointer"
             }}/>
-            <LogoutIcon sx={{ 
+            {/* </Link> */}
+            <LogoutIcon 
+            
+            onClick={handleLogout}
+            sx={{ 
                 display: "block",
                 width: "32px",
                 height: "32px",
@@ -54,7 +73,8 @@ export default function LoginBar(){
                 float: "left",
                 marginRight: "5px",
                 borderRadius: "30%",
-                backgroundColor: "red"
+                backgroundColor: "red",
+                cursor: "pointer"
             }}/>
             </div>
             <div style={{
@@ -76,7 +96,8 @@ export default function LoginBar(){
                 float: "left",
                 marginRight: "5px",
                 borderRadius: "30%",
-                backgroundColor: "orange"
+                backgroundColor: "orange",
+                cursor: "pointer"
             }}/>
             </div>
         </Box>

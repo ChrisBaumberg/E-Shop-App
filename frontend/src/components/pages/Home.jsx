@@ -1,19 +1,15 @@
 import { Box, Grid2 as Grid } from "@mui/material";
 
 
-import ProductPage from "./ProductPage";
-import { useState } from "react";
+import ProductCard from "../parts/cards/ProductCard";
+import { Fragment, useEffect, useState } from "react";
+import { getProductsFromBackend } from "../../utils/AjaxHandler";
 
 export function Home(){
-    const [productPicture, setProductPicture] = useState(["../public/img/Coca-Cola_klein.jpg"])
-    const [title, setTitle] = useState(["Elbling trocken 2023"])
-    const [description, setDescription] = useState()
-    const [price, setPrice] = useState(["€ 6,00"])
-    const [category, setCategory] = useState(["Drink desposit"])
-    
-    const [size, setSize] = useState(["l"]);
-    const [comparePrice, setComparePrice] = useState(["€ 8,00"]);
-    const [productSize, setProductSize] = useState(["0,75"]);
+    const [products, setProducts] = useState([])
+    useEffect(()=>{
+        getProductsFromBackend(setProducts);
+    },[])
 
     return(
         <Box sx={{
@@ -42,12 +38,16 @@ export function Home(){
                     }}>
                     
                     </Box>
-                    {/* ProductPage */}
+                    {/* Product Card*/}
                     <Box sx={{
                         
-                    }}>
-                    <ProductPage title={title} imageUrl={productPicture} description={description} price={price} category={category} size={size} productSize={productSize} comparePrice={comparePrice}/>
-                    
+                    }}>{ products.map((product)=>{
+                        return( <Fragment key={product.id}>
+                    <ProductCard title={title} imageUrl={productPicture} description={description} price={price} category={category} size={size} productSize={productSize} comparePrice={comparePrice}/>
+                    </Fragment>
+                        )
+                    })
+                }
                     </Box>
                 </Grid>
                 {/*</Grid>*/}

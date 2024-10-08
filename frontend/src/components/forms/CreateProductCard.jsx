@@ -4,6 +4,7 @@ import {styled} from "@mui/material/styles"
 
 import { useCallback, useRef, useState } from "react";
 import ProductCard from "../parts/cards/ProductCard";
+import { createProduct } from "../../utils/AjaxHandler";
 
 
 
@@ -232,7 +233,7 @@ export default function CreateProductCard(){
             marginLeft: "5px",
             width: "230px",
        
-        }} >Übernehmen</Button>
+        }} onClick={createProduct}>Übernehmen</Button>
        <Button sx={{
             border: "1px solid black",
             borderRadius: "20px",

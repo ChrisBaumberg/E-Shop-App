@@ -13,10 +13,10 @@ import axios from "axios";
 export default function Register(){
     const [equal, setEqual] = useState(false);
     const formRef = useRef();
-    const navigator = useNavigate();
+    /*const navigator = useNavigate();
     const handleNavigate = () =>{
         navigator("/login")
-    }
+    }*/
     const checkPassword = () =>{
         console.log(formRef.current);
         const form = formRef.current;
@@ -33,11 +33,11 @@ export default function Register(){
             fullname: form.fullname.value,
             email: form.email.value,
             password: form.password.value,
-            role: "student"
+            role: "client"
         }
        
         const config = {
-            url:"http://localhost:3002/api/register",
+            url:"http://localhost:3003/api/register",
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -55,6 +55,7 @@ export default function Register(){
             handleNavigate();
         }catch(error){
             console.log("Resp Error")
+            console.log(error)
             showNotifications(`${resp.data.message}`,"normal");
             console.log(error.resp.data.message);
         }
@@ -65,25 +66,10 @@ export default function Register(){
         <Box sx={{
             height: '100vh',
             width: '100vw',
-            display: 'grid',
-            gridTemplateColumns: '45% 55%'
+            
         }}>
-            {/* //Here comes the box component for the picture */}
-            <Box 
-            component='img'
-            sx={{
-                marginLeft: '1%',
-                justifySelf: 'center',
-                alignSelf: 'center',
-                height: '70%',
-                width: '90%',
-                borderRadius: '15%',
-                
-            }}
-            src='/love.png'
-            alt='two students working together'
-            >
-            </Box>
+            
+            
             {/* //Here comes the box component for the form */}
             <Box
             component='form'     
@@ -93,7 +79,7 @@ export default function Register(){
                 height: '100%',
                 width: '100%',
                 display: 'grid',
-                gridTemplateRows: '60% 25% 15%',
+                gridTemplateRows: '80% 20%',
             }}>
                 <Box            
                 sx={{
@@ -135,41 +121,7 @@ export default function Register(){
                     name='confirmPassword'                   
                     label={equal ? "💚 Equal" : "❗Password not equal"} variant="standard"/>
                 </Box>
-                <Box
-                sx={{
-                    height: '100%',
-                    width: '50%',
-                    backgroundColor: 'success.main',
-                    justifySelf: 'center',
-                    alignSelf: 'center',
-                    borderRadius: '10%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: '1.5rem',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-
-                }}>
-                    <p>Upload Matriculation file <UploadFileIcon/></p>
-                    <Button
-                        variant="contained"
-                        component="label"
-
-                        >
-                        Upload File
-                        <input
-                            type="file"
-                            accept="application/pdf"
-                            hidden
-                            name="matriculationFile"
-                            // onChange={(e) => {setImage(e.target.files[0])}}
-                        />
-                        </Button>
-
-                </Box>
+                
                 <Box
                 sx={{
                     height: '100%',
@@ -181,7 +133,7 @@ export default function Register(){
                 }}>
                 <Button
                 type='submit'
-                sx={{
+                style={{
                     height: '50%',
                     width: '30%',
                     backgroundColor: 'success.main',

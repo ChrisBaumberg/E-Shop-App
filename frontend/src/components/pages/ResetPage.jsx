@@ -15,7 +15,7 @@ const onFormHandleEmail = async(e, formRef, navigator, setResetNumber) =>{
     e.preventDefault();
     const email = formRef.current.email.value;
     const config = {
-        url: "http://localhost:3002/api/auth/reset",
+        url: "http://localhost:3003/api/auth/reset",
         method: "POST",
         headers: {
             "Content-Type":"application/json"
@@ -54,7 +54,7 @@ const onVerifyHandle = (e, formRef, resetNumber, setResetAllowed, navigator) =>{
 const onPasswordHandle = async (e, formRef, navigator, emailToken, setEmailToken) =>{
     const newPassword = formRef.current.password.value;
     const config = {
-        url: "http://localhost:3002/api/auth/reset/newPassword",
+        url: "http://localhost:3003/api/auth/reset/newPassword",
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Button, TextField } from "@mui/material";
 import Headline from "../parts/header/Headline";
 import TextfieldLogin from "../parts/textfields/TextFieldLogin";
-import QuoteCard from "../parts/cards/QuoteCard";
+
 import {  useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,7 +15,7 @@ import SmallHelperText from "../parts/text/SmallHelperText";
 export default function Login({handleLogin}){
     const valueEmail = useRef();
     const valuePassword = useRef();
-    const navigator = useNavigate();
+    //const navigator = useNavigate();
 
     const handleClick = async (e)=>{
         e.preventDefault();
@@ -24,7 +24,7 @@ export default function Login({handleLogin}){
             password: valuePassword.current.value
         }
         const config = {
-            url: "https://localhost:3002/api/login",
+            url: "https://localhost:3003/api/login",
             method: "POST",
             headers: {
                 "Content-Type" : "application/json"
@@ -36,7 +36,7 @@ export default function Login({handleLogin}){
             showNotifications(`${response.data.message}`,"normal")
             localStorage.setItem("token", response.data.token);
             handleLogin(true);
-            navigator("/feed")
+            //navigator("/feed")
         }
         catch(error){
             showNotifications(`${error.response.data.message}`,"red")
@@ -48,12 +48,10 @@ export default function Login({handleLogin}){
             width: "100vw",
             height: "100vh",
             display: 'grid',
-            gridTemplateRows: '15% 65% 20%',
+            gridTemplateRows: '65% 35%',
             fontSize: "32px"
         }}>
-            {/*Here is the Headline component*/}
-            <Headline weight={"32px"}/>
-
+            
          
             {/*Here is the main content layout two columns */}
             <Box sx={{
@@ -84,7 +82,7 @@ export default function Login({handleLogin}){
                             alignItems: "center",
                        
                         }}>
-                            <QuoteCard/>
+                           
 
                     </Box>
             </Box>

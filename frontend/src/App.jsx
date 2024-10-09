@@ -40,9 +40,9 @@ function App() {
     {/*<WelcomePage/>*/}
       {/*<AdminPage/>*/}
       {/*<CreateProductCard/>*/}
-      {/*<Register/>*/}
+      <Register/>
       {/*<Home/>*/}
-      <Login/>
+      {/*<Login/>*/}
        
       {/*<ProductCard title={title} imageUrl={productPicture} description={description} price={price} category={category} size={size} productSize={productSize} comparePrice={comparePrice}/>*/}
 

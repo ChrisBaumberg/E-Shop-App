@@ -34,13 +34,13 @@ app.use("/test", testRouter);
 app.use("/api/products", productRouter);
 
 //register routes
-app.use("/api/register");
+app.use("/api/register", registerRouter);
 
 //login routes
-app.use("/api/login");
+app.use("/api/login", loginRouter);
 
 //reset routes
-app.use("/api/reset");
+app.use("/api/reset", resetRouter);
 
 app.listen(PORT,()=>{
     console.log(`Running on Port ${PORT}`);

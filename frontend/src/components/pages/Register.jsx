@@ -45,14 +45,14 @@ export default function Register(){
             data: JSON.stringify(formData)
         }
    
-      
+        console.log(formData)
         try{
       
             const resp = await axios(config);
-            console.log("Resp Success")
+            console.log("Resp Success");
             showNotifications(`${resp.data.message}`,"normal");
             console.log(resp.data.message);
-            handleNavigate();
+           // handleNavigate();
         }catch(error){
             console.log("Resp Error")
             console.log(error)
@@ -79,7 +79,8 @@ export default function Register(){
                 height: '100%',
                 width: '100%',
                 display: 'grid',
-                gridTemplateRows: '80% 20%',
+                gridTemplateRows: '70% 15% 15%',
+                
             }}>
                 <Box            
                 sx={{
@@ -89,7 +90,8 @@ export default function Register(){
                     height: '100%',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    rowGap: '5%'
+                    rowGap: '5%',
+                    //border: "1px solid black"
                 }}>
                     <TextField  required id="outlined-basic" label="fullname"
                     InputLabelProps={{
@@ -127,10 +129,14 @@ export default function Register(){
                     height: '100%',
                     width: '100%',
                     display: 'flex',
+                    
                     justifyContent: 'center',
                     alignItems: 'center',
                     cursor: 'pointer'
                 }}>
+                    
+                    
+                    
                 <Button
                 type='submit'
                 style={{
@@ -140,7 +146,20 @@ export default function Register(){
                 
                 }}
                 variant='contained'
-                >Register</Button>
+                >Register</Button> <br/>
+                
+                
+                </Box>
+                <Box sx={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                }}>
+                Du hast bereits einen Account? {/*<Link to="/login">*/} <span>Zum Login</span> {/*</Link>*/}
                 </Box>
             </Box>
                 

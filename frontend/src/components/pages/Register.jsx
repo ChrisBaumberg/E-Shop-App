@@ -13,10 +13,10 @@ import axios from "axios";
 export default function Register(){
     const [equal, setEqual] = useState(false);
     const formRef = useRef();
-    /*const navigator = useNavigate();
+    const navigator = useNavigate();
     const handleNavigate = () =>{
         navigator("/login")
-    }*/
+    }
     const checkPassword = () =>{
         console.log(formRef.current);
         const form = formRef.current;
@@ -51,8 +51,8 @@ export default function Register(){
             const resp = await axios(config);
             console.log("Resp Success");
             showNotifications(`${resp.data.message}`,"normal");
-            console.log(resp.data.message);
-           // handleNavigate();
+            //console.log(resp.data.message);
+            handleNavigate();
         }catch(error){
             console.log("Resp Error")
             console.log(error)
@@ -157,9 +157,17 @@ export default function Register(){
                     
                     justifyContent: 'center',
                     alignItems: 'center',
-                    cursor: 'pointer'
-                }}>
-                Du hast bereits einen Account? {/*<Link to="/login">*/} <span>Zum Login</span> {/*</Link>*/}
+                    
+                }}
+                
+                >
+                Du hast bereits einen Account? <span style={
+                    {cursor: 'pointer',
+                        textDecoration: "underline",
+                        color: "blue",
+                        marginLeft: "10px"
+                    }
+                } onClick={handleNavigate}>Zum Login</span> 
                 </Box>
             </Box>
                 

@@ -4,7 +4,7 @@ import { Box, Button, TextField } from "@mui/material";
 import Headline from "../parts/header/Headline";
 import TextfieldLogin from "../parts/textfields/TextFieldLogin";
 
-import {  useRef } from "react";
+import {  useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import showNotifications from "../Notifications/showNotifications";
@@ -13,9 +13,10 @@ import SmallHelperText from "../parts/text/SmallHelperText";
 
 
 export default function Login({handleLogin}){
+    const [isLoggedIn, setLoggedIn] = useState(false);
     const valueEmail = useRef();
     const valuePassword = useRef();
-    //const navigator = useNavigate();
+  
 
     const handleClick = async (e)=>{
         e.preventDefault();
@@ -35,79 +36,54 @@ export default function Login({handleLogin}){
             const response = await axios(config);
             showNotifications(`${response.data.message}`,"normal")
             localStorage.setItem("token", response.data.token);
-            handleLogin(true);
-            //navigator("/feed")
+            setLoggedIn(true);
+            
         }
         catch(error){
             showNotifications(`${error.response.data.message}`,"red")
         }
     }
     return(
-        //overall box for general layout rows 15, 65, 20
+       <>
+        {/*Here is the main content layout two rows */}
         <Box sx={{
-            width: "100vw",
-            height: "100vh",
-            display: 'grid',
-            gridTemplateRows: '65% 35%',
-            fontSize: "32px"
-        }}>
-            
-         
-            {/*Here is the main content layout two columns */}
-            <Box sx={{
                 width: "100%",
-                height: "100%",
+                height: "100vh",
                 display: "grid",
-                gridTemplateColumns: "50% 50%",
-     
+                gridTemplateRows: "90% 10%",
+                bgcolor: "red"
             }}>
-                    {/* Login fields */}
-                    <Box sx={{
-                            width: "100%",
-                            height: "100%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
                     
-                        }}>
-                            <TextfieldLogin valueEmail={valueEmail} valuePassword={valuePassword}/>
-                        </Box>
-                        
-                        {/* QuoteCard */}
-                        <Box sx={{
-                            width: "100%",
-                            height: "100%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+                <Box sx={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
                        
+                        justifyContent: "center",
+                        alignItems: "center",
+                        bgcolor: "orange"
                         }}>
+                        <TextfieldLogin style={{
+                            justifyContent: "center",
+                            alignItems: "center", 
+                        }} valueEmail={valueEmail} valuePassword={valuePassword}/>
+                </Box>
+                <Box sx={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                            
-
-                    </Box>
-            </Box>
-                        {/* Submitbuttons and Helpertext */}
-                        <Box sx={{
-                            width: "100%",
-                            height: "100%",
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            rowGap: "10%",
+                        rowGap: "10%",
                         }}>
-                            {/* SubmitButton */}
-                            <SubmitButton onHandleClick={handleClick} text={"login"}/>
-                            <SmallHelperText text={"Continue to Feed"}/>
-                            <Box sx={{
-                                width:"80vw",
-                                display: "flex",
-                                gap: "1%",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
+                        {/* SubmitButton */}
+                        <SubmitButton onHandleClick={handleClick} text={"login"}/>
+                        
 
-                            </Box>
-                        </Box>
+                </Box>     
         </Box>
+                        
+        </>
     )
 }

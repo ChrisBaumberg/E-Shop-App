@@ -12,6 +12,8 @@ export function Home(){
     },[])
 
     return(
+        <>
+        <h1 style={{textAlign:"center"}}>Unsere Produkte:</h1>
         <Box sx={{
             //backgroundColor: "background.default",
             minHeight: "150vh",
@@ -24,8 +26,9 @@ export function Home(){
             paddingLeft: "10px",
             marginLeft: "5vw"
         }}>
+            
             <Box>
-                {/*<Grid container spacing = {2}>*/}
+              
                     {/* Header */}
                 <Grid xs={12} md={12}>
                     <Box sx={{
@@ -53,5 +56,6 @@ export function Home(){
                 {/*</Grid>*/}
             </Box>
         </Box>
+        </>
     )
 }

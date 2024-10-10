@@ -1,17 +1,18 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useRef, useState } from "react";
 
 export default function Searchbar(){
-    const [textInput, setTextInput] = useState([]);
+    const [textInput, setTextInput] = useState();
     const searchtextRef = useRef();
-    const getSearchInput = ()=>{
+    const getSearchInput = async()=>{
         
         try{
         
         const searchText = searchtextRef.current.searchbar.value;
-        console.log(searchText)
+        
         setTextInput(searchText)
+        console.log(searchText)
         }
         catch(e){
             console.log("Failed getting searchtext\nError: ", e)
@@ -25,13 +26,14 @@ export default function Searchbar(){
         console.log(textInput)
     }
     return(
-        <div className="search" style={{
+        <Box className="search" style={{
             position: "relative",
             width: "90%",
+            height: "70%",
             display: "block",
             float: "left",
             borderRadius: "5px"
-        }}>
+        }} component="form" ref={searchtextRef}>
             <TextField
             sx={{
                 width: "89%",
@@ -51,7 +53,7 @@ export default function Searchbar(){
             </TextField>
             <Button onClick={handleOnClick}  sx={{
                 width: "10%",
-                height: "10%",
+                height: "20%",
                 backgroundColor: "orange",
                 borderLeft: "1px solid black"
             }}
@@ -60,6 +62,6 @@ export default function Searchbar(){
                 
             />
             </Button>
-        </div>
+        </Box>
     )
 }

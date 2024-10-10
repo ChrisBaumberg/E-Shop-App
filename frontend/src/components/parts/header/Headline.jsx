@@ -14,7 +14,7 @@ export default function Headline({size}){
             gap: "10px",
             marginBottom: "25px",
             backgroundColor: "green",
-            height: "48px"
+            height: "56px"
 
     }}>
         {/*<Link to ="/">*/}
@@ -39,10 +39,10 @@ export default function Headline({size}){
             paddingLeft: "10px",
             width: "100%"
         }}>
-        {/*<Searchbar sx={{
+        <Searchbar sx={{
             height: "100%",
             marginLeft: "-200px"
-        }}/>*/}
+        }}/>
         </Box>
     
 </Box>

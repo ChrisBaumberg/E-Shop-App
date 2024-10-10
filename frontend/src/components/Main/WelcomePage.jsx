@@ -9,21 +9,25 @@ import {initialProducts } from "../../data/productsData";
 export function WelcomePage(){
     /* company as string - example: "company" */
     const company = "company"
-    const [products, setProducts] = useState([initialProducts]);
+    const [products, setProducts] = useState();
     useEffect (()=>{
         getProductsFromBackend(setProducts);
     },[])
     return(
-        <>
         <Box sx={{
-            backgroundColor: "background.default"
+            display: "grid",
+            gridTemplateRows: "10% 90%",
+            height: "100vh",
+            gap: "10px"
         }}>
-            <div style={{
-                alignItems: "center",
-                justifyContent: "center",
-                width: "100vw",
-                height: "100vh"
+
+        <Box sx={{
+            backgroundColor: "background.default",
+            alignItems: "center",
+            justifyContent: "center",
+            
             }}>
+         
 
                 <h1 style = {{
                     textAlign:"center",
@@ -31,8 +35,18 @@ export function WelcomePage(){
                 }}>
                     Willkommen im E-Shop der Firma {company}
                 </h1>
-            </div>
+      
         </Box>
-        </>
+        <Box sx={{
+            bgcolor: "sandybrown",
+            height: "100%"
+        }}>
+            <h2 style={{
+                textAlign:"center",
+            }}>
+                Unsere Empfehlungen:
+            </h2>
+        </Box>
+        </Box>
     )
 }

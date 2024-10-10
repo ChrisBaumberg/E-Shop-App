@@ -6,7 +6,7 @@ import Headline from './components/parts/header/Headline'
 import { Home } from './components/pages/Home'
 import { WelcomePage } from './components/Main/WelcomePage'
 import LoginBar from './components/parts/bars/LoginBar'
-import ProductPage from './components/pages/ProductPage'
+
 import readFile from './components/helpers/FileReader'
 import CreateProductCard from './components/forms/CreateProductCard'
 import AdminPage from './components/Main/admins/AdminPage'
@@ -14,6 +14,8 @@ import {useNavigate, BrowserRouter, Routes, Route} from "react-router-dom";
 import ProductCard from './components/parts/cards/ProductCard'
 import Register from './components/pages/Register';
 import Login from './components/pages/Login'
+import ResetPage from './components/pages/ResetPage'
+import Profile from './components/pages/Profile'
 //import companyLogo from "../public/img/Logo-Grey.svg"
 
 function App() {
@@ -32,7 +34,7 @@ function App() {
   const handleLogin = () =>{
     setLoggedIn(true);
   }
-  console.log(isLoggedIn)
+
 
   return (
     <>
@@ -40,12 +42,13 @@ function App() {
     {/*<WelcomePage/>*/}
       {/*<AdminPage/>*/}
       {/*<CreateProductCard/>*/}
-      <Register/>
+      {/*<Register/>*/}
       {/*<Home/>*/}
       {/*<Login/>*/}
-       
-      {/*<ProductCard title={title} imageUrl={productPicture} description={description} price={price} category={category} size={size} productSize={productSize} comparePrice={comparePrice}/>*/}
-
+      {/*<ResetPage/>*/}
+      {/*<Profile/>*/}
+      {/*<ProductCard/>*/}
+      
             
      
     </>

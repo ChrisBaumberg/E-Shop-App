@@ -82,7 +82,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
     const [equal, setEqual] = useState(false);
     const [emailToken, setEmailToken] = useState("");
     const formRef = useRef();
-    const navigator = useNavigate();
+   // const navigator = useNavigate();
     
     useEffect(()=>{
         setEmailToken(localStorage.getItem("resetEmail"));

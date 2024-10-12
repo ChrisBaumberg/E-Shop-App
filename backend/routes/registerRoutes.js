@@ -13,7 +13,7 @@ const limiter = rateLimit({
   });
   
 
-registerRouter.post("/api/register",limiter, async(req, res)=>{
+registerRouter.post("/",limiter, async(req, res)=>{
     console.log("Posting")
     try{
       //Daten extrathieren - destructering

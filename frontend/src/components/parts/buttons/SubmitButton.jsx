@@ -8,7 +8,7 @@ export default function SubmitButton({text, postitionValue, onHandleClick}){
             variant="text"
             sx={{
                 width: "10vw",
-                height: "10vh",
+                height: "80%",
                 backgroundColor: "success.main",
                 color: "text.primary",
                 borderRadius: "15%",

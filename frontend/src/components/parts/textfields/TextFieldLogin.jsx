@@ -1,17 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, TextField, Button } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function TextFieldLogin({valueEmail, valuePassword}){
-    //const [fieldType, setFieldType] = useState(true);
-    /*const navigator = useNavigate();
+    const [fieldType, setFieldType] = useState(true);
+    const navigator = useNavigate();
     const handleClick = ()=>{
         navigator("/register")
     }
     const handleNavigateForgotPassword= () =>{
         navigator("/reset/askEmail")
-    }*/
+    }
+
     return(
         //form for login fields
         <Box
@@ -22,7 +24,7 @@ export default function TextFieldLogin({valueEmail, valuePassword}){
             flexDirection:"column",
             width: "80%",
             height: "100%",
-            alignItems: "flex-end",
+            alignItems: "center",
             justifyContent: "center"
         }}>
         <TextField
@@ -44,12 +46,12 @@ export default function TextFieldLogin({valueEmail, valuePassword}){
             marginBotton: "10%",
         }}
         required
-        //type={fieldType ? "password": "text"}
+        type={fieldType ? "password": "text"}
         id="outlined-required"
         label="password"
         defaultValue="password"
         name="password"
-        /><VisibilityIcon /*onClick={(e) => setFieldType(!fieldType)}*//>
+        /><VisibilityIcon onClick={(e) => setFieldType(!fieldType)}/>
             <Box
             sx={{
                 width: "30%",
@@ -58,14 +60,14 @@ export default function TextFieldLogin({valueEmail, valuePassword}){
                 gap: "30%",
                 justifyContent: "start"
             }}>
-                {/*<Link to = "/register">*/}
+                
                 <Button /*onClick= {handleClick}*/ sx={{
                     width: "30%",
                     color: "text.primary"
-                }}>Register</Button>
-                {/*</Link>*/}
+                }} onClick={handleClick}>Register</Button>
+                
                 <Button
-                /*onClick = {(e)=> handleNavigateForgotPassword()}*/
+                onClick = {(e)=> handleNavigateForgotPassword()}
                 sx={{
                     width: "30%",
                     color: "text.primary"

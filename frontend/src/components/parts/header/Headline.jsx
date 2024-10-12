@@ -1,11 +1,15 @@
 import {Box} from "@mui/material";
 import LoginBar from "../bars/LoginBar";
 import Searchbar from "../bars/Searchbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 {/*Headline */}
 
 export default function Headline({size}){
+    const navigator = useNavigate();
+    const handleLogoClick = () =>{
+        navigator("/")
+    }
 
     return(
         <Box sx={{
@@ -13,11 +17,12 @@ export default function Headline({size}){
             justifyContent: "start",
             gap: "10px",
             marginBottom: "25px",
-            backgroundColor: "green",
+            border: "1px solid black",
+            borderRadius: "10px",
             height: "56px"
 
     }}>
-        {/*<Link to ="/">*/}
+        
         <Box sx={{
             display: "flex",
             alignItems: "center",
@@ -26,9 +31,11 @@ export default function Headline({size}){
             cursor: "pointer",
             border: "1px solid black"
         }} >
-        <img src = {""} alt={"Firmenlogo"}/>
+            
+        <img src = {""} alt={"Firmenlogo"} onClick={handleLogoClick}/>
+       
     </Box>
-    {/*</Link>*/}
+    
     <Box sx={{
         display:"flex",
         justifyContent: "flex-end",

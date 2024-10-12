@@ -3,26 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
 
 export default function AdminPage(){
-   /* function handleOnClick(e){
-            const [buttonValue, setButtonValue] = useState();
-            setButtonValue(e.target.value);
-            console.log(buttonValue)
-    }
-    
-    
+    const [buttonValue, setButtonValue] = useState();
+    const navigate= useNavigate();
 
-    /*const navigate= useNavigate();
-    useEffect(()=>{
-        if (buttonValue =="newProduct"){
-            console.log("navigate to /newproduct")
+    const handleOnCreate = (e)=>{
+            
+           e.preventDefault();
             navigate("/newproduct")
         }
-        else{
-            console.log("No Button value")
-        }
         
-    },[buttonValue])*/
-
     return(
         <Box sx={{
             backgroundColor:"red",
@@ -48,7 +37,9 @@ export default function AdminPage(){
             
                 color: "yellow",
                 width: "300px"
-            }}value="newProduct">Neues Produkt hinzufügen</Button>
+            }}value="newProduct"
+            onClick={handleOnCreate}
+            >Neues Produkt hinzufügen</Button>
             {/* Update productcard (title, description, price, category) */}
             <Button sx={{
                 border: "1px solid black",
@@ -66,14 +57,8 @@ export default function AdminPage(){
                 color: "yellow",
                 width: "300px"
             }}>Produkt entfernen</Button>
-            {/* Add new category */}
-            <Button sx={{
-                border: "1px solid black",
-                borderRadius: "20px",
-                backgroundColor: "green",
-                color: "yellow",
-                width: "300px"
-            }}>Neue Kategorie hinzufügen</Button>
+          
+           
             </Box>
     )
 }

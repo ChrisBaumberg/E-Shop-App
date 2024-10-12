@@ -59,8 +59,8 @@ function App() {
               "Type in your new Password"
             }/> : <Navigate to="/login"/>}></Route>
             <Route path="/settings" element={<Settings/>}/>
-      {/*<AdminPage/>*/}
-      {/*<CreateProductCard/>*/}
+      <Route path="/admin" element={<AdminPage/>}/>
+      <Route path="/newproduct" element={<CreateProductCard/>}/>
  
       {/*<Home/>*/}
      

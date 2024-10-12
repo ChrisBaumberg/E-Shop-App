@@ -50,8 +50,8 @@ export default function Login({handleLogin}){
                 width: "100%",
                 height: "100vh",
                 display: "grid",
-                gridTemplateRows: "90% 10%",
-                bgcolor: "red"
+                gridTemplateRows: "60% 40%",
+            
             }}>
                     
                 <Box sx={{
@@ -61,7 +61,7 @@ export default function Login({handleLogin}){
                        
                         justifyContent: "center",
                         alignItems: "center",
-                        bgcolor: "orange"
+                       
                         }}>
                         <TextfieldLogin style={{
                             justifyContent: "center",
@@ -70,12 +70,12 @@ export default function Login({handleLogin}){
                 </Box>
                 <Box sx={{
                         width: "100%",
-                        height: "100%",
+                        height: "75px",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                           
-                        rowGap: "10%",
+                         
+                        rowGap: "10px",
                         }}>
                         {/* SubmitButton */}
                         <SubmitButton onHandleClick={handleClick} text={"login"}/>

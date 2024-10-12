@@ -47,6 +47,8 @@ export default function CreateProductCard(){
         e.preventDefault();
         getProductInput();
     }
+
+  
   
     const VisuallyHiddenInput = styled ("input")({
         clip: "rect(0 0 0 0)",
@@ -84,11 +86,11 @@ export default function CreateProductCard(){
         flexFlow: "column nowrap",
         borderRadius: "20px",
         gap: "10px",
-        paddingLeft: "5px",
-        paddingRight: "5px",
+       
         justifyContent: "center",
         alignItems: "center",
-    
+        paddingTop: "10px",
+        paddingBottom: "10px"
        }}>
         
         <Button component="label" style={{color: "black", backgroundColor: "orange"}}
@@ -200,7 +202,7 @@ export default function CreateProductCard(){
                     textAlign: "start"
                 }}>
                     Größe: {productSize}{size}<br/>
-                    <span style={{fontSize:"24px"}}>{price} €</span> <br/><span style={{fontSize: "12px"}}>{despositValue}</span><br/>
+                    <span style={{fontSize:"24px"}}>{price} €</span> <br/>{despositValue? <span style={{fontSize: "12px"}}>Pfand: {despositValue} €</span>:null}<br/>
                     <span style={{fontSize: "12px"}}>({comparePrice} €/{size})</span>
                     <br/>
                     <span style={{fontSize:"12px"}}>inkl. 19% MwSt., zzgl. Versandkosten</span> {/* optional */}
@@ -208,7 +210,7 @@ export default function CreateProductCard(){
                 <Box sx={{
                     
                 }}>
-                    <input type="number" id="productCount" style={{width: "56px", }} min= "1" max= "15" placeholder={1} onInput={e => setInput(e.target.value)}></input> 
+                    <input type="number" id="productCount" style={{width: "56px", }} min= "1" max= "15" placeholder={1} readOnly></input> 
                     <Button sx={{
                         width: "250px", backgroundColor: "red", color: "yellow", marginLeft: "20px"
                     }}>In den Warenkorb</Button>
@@ -244,7 +246,7 @@ export default function CreateProductCard(){
             width: "230px",
        
         }} onClick={handleAddClick}>Vorschau</Button>
-       <Button type="Reset" sx={{
+       <Button type="reset"  sx={{
             border: "1px solid black",
             borderRadius: "20px",
             backgroundColor: "green",

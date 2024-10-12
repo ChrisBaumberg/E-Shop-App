@@ -22,7 +22,7 @@ export function WelcomePage(){
         }}>
 
         <Box sx={{
-            backgroundColor: "background.default",
+            
             alignItems: "center",
             justifyContent: "center",
             
@@ -38,7 +38,7 @@ export function WelcomePage(){
       
         </Box>
         <Box sx={{
-            bgcolor: "sandybrown",
+           
             height: "100%"
         }}>
             <h2 style={{

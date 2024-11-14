@@ -23,9 +23,10 @@ export default function Settings({settingsOpen, setSettingsOpen, isLoggedIn}){
             position: "absolute",
             backgroundColor: "aqua",
             right: "5%",
-            top: "12%",
+            top: "65px",
             width: "100px",
             border: "1px solid #012345",
+            
             boxShadow: 24,
             p:4
         }}>

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Headline from "../parts/header/Headline";
+
 import { useEffect, useState } from "react";
 import { getProductsFromBackend } from "../../utils/AjaxHandler";
 import {initialProducts } from "../../data/productsData"; 
@@ -33,7 +33,7 @@ export function WelcomePage(){
                     textAlign:"center",
                     
                 }}>
-                    Willkommen im E-Shop der Firma {company}
+                    Willkommen im E-Shop von {company}
                 </h1>
       
         </Box>

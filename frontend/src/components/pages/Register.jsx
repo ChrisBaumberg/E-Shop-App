@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { useState, useRef } from "react";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import UploadFileIcon from "@mui/icons-material/UploadFile";
+
 import showNotifications from "../Notifications/showNotifications";
 import { useNavigate } from "react-router-dom";
 
@@ -30,7 +30,7 @@ export default function Register(){
         console.log(form)
         const formData={
             id: uuidv4(),
-            fullname: form.fullname.value,
+            username: form.username.value,
             email: form.email.value,
             password: form.password.value,
             role: "client"
@@ -46,19 +46,19 @@ export default function Register(){
         }
    
         console.log(formData)
-        try{
+        /*try{*/
       
             const resp = await axios(config);
             console.log("Resp Success");
             showNotifications(`${resp.data.message}`,"normal");
-            //console.log(resp.data.message);
+            console.log(resp.data.message);
             handleNavigate();
-        }catch(error){
+       /* }catch(error){
             console.log("Resp Error")
             console.log(error)
             showNotifications(`${resp.data.message}`,"normal");
             console.log(error.resp.data.message);
-        }
+        }*/
         console.log("end register")
     }
     return(
@@ -93,11 +93,12 @@ export default function Register(){
                     rowGap: '5%',
                     //border: "1px solid black"
                 }}>
-                    <TextField  required id="outlined-basic" label="fullname"
+                    
+                    <TextField  required id="outlined-basic" label="username"
                     InputLabelProps={{
                         style: { color: 'black' },
                     }}
-                    name= "fullname" variant="standard" />
+                    name= "username" variant="standard" />
                     <TextField required id="outlined-basic" 
                     InputLabelProps={{
                         style: { color: 'black' },
@@ -106,12 +107,7 @@ export default function Register(){
                     <TextField required id="outlined-basic" 
                     InputLabelProps={{
                         style: { color: 'black' },
-                    }}                        
-                    label="username" name="username" variant="standard" />
-                    <TextField required id="outlined-basic" 
-                    InputLabelProps={{
-                        style: { color: 'black' },
-                    }}                        
+                    }}                  
                     label="password"
                     name="password" variant="standard"/>
                     <TextField required

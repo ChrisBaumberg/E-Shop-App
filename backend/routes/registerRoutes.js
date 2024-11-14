@@ -14,11 +14,11 @@ const limiter = rateLimit({
   
 
 registerRouter.post("/",limiter, async(req, res)=>{
-    console.log("Posting")
+    console.log("Register Route backend")
     try{
       //Daten extrathieren - destructering
-      const{id, fullname, email, password, role} = req.body;
-      if(!id||!fullname||!email||!password||!role){
+      const{id, username, email, password, role} = req.body;
+      if(!id||!username||!email||!password||!role){
         return res.status(404).send({message: "Please fill out all fields"});
       }
       //existiert User?
@@ -27,7 +27,7 @@ registerRouter.post("/",limiter, async(req, res)=>{
         return res.status(409).send({message: "User already exists"});
       }
       const hashPassword = await bcrypt.hash(password, 10);
-      const user = new User({id, fullname, email, hashPassword, role});
+      const user = new User({id, username, email, hashPassword, role});
       await User.create(user);
       res.status(201).send({message: "User successfully created!"});
     }

@@ -1,10 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
-
 
 const loginRouter = express.Router();
+require("dotenv").config();
 const User =require("../models/userModel");
 
 //login route to send post request with email and password and check if

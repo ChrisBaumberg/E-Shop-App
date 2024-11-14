@@ -1,15 +1,14 @@
 //overall box for general layout rows: 15% 65% 20%
 import React from "react";
 import { Box, Button, TextField } from "@mui/material";
-import Headline from "../parts/header/Headline";
+
 import TextfieldLogin from "../parts/textfields/TextFieldLogin";
 
 import {  useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import showNotifications from "../Notifications/showNotifications";
 import SubmitButton from "../parts/buttons/SubmitButton";
-import SmallHelperText from "../parts/text/SmallHelperText";
 
 
 export default function Login({handleLogin}){

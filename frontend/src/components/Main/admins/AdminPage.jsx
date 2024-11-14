@@ -41,7 +41,7 @@ export default function AdminPage(){
             onClick={handleOnCreate}
             >Neues Produkt hinzufügen</Button>
             {/* Update productcard (title, description, price, category) */}
-            <Button sx={{
+            <Button style={{
                 border: "1px solid black",
                 borderRadius: "20px",
                 backgroundColor: "green",
@@ -50,7 +50,7 @@ export default function AdminPage(){
                 width: "300px"
             }}>Produkt updaten</Button>
             {/* Delete product */}
-            <Button sx={{
+            <Button style={{
                 border: "1px solid black",
                 borderRadius: "20px",
                 backgroundColor: "green",

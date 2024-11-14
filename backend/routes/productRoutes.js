@@ -1,12 +1,12 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const multer = require("multer");
 
 const productRouter = express.Router();
-
-const Post = require("../models/postModel");
+require("dotenv").config();
+//models
+const Product = require("../models/productModel");
 const User = require("../models/userModel");
 
 const storage = multer.diskStorage({
@@ -20,27 +20,20 @@ const storage = multer.diskStorage({
 
 });
 
-
 const upload = multer({storage});
 
 //posts
-
-
-
-
-
-
 productRouter.post("/", upload.single("image"), async (req,res)=>{
     console.log(req);
     const {id, 
         title, 
         description, productSize, price, size, comparePrice, category, picture} = req.body;
     const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
-    const product = new Post({id, 
+    const product = new Product({id, 
         title, 
         description, productSize, price, size, comparePrice, category, picture});
     try{
-        await Post.create(product);
+        await Product.create(product);
         res.status(201).send({message: "Post created!"});
     }
     catch (error){
@@ -50,7 +43,7 @@ productRouter.post("/", upload.single("image"), async (req,res)=>{
 
 productRouter.get("", async(req,res)=>{
     try{
-        const products = await Post.find();
+        const products = await Product.find();
    
         res.status(201).send(products);
     }

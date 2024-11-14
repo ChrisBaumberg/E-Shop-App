@@ -6,7 +6,7 @@ export default function SubmitButton({text, postitionValue, onHandleClick}){
         <Button
             onClick={onHandleClick}
             variant="text"
-            sx={{
+            style={{
                 width: "10vw",
                 height: "80%",
                 backgroundColor: "success.main",

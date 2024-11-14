@@ -51,12 +51,32 @@ export default function Profile(){
                 
                 padding: "10px"
             }} component="form" ref={formRef}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "5%"
+                    }}>
             <TextField id="outlined-basic" label="Vorname" name="prename"/>
             <TextField id="outlined-basic" label="Nachname" name="familyname"/>
-            <TextField id="outlined-basic" label="Strasse" name="street"/>
-            <TextField id="outlined-basic" label="Hausnummer" type="number" name="houseNumber"/>
-            <TextField id="outlined-basic" label="Postleitzahl" name="postCityCode"/>
-            <TextField id="outlined-basic" label="Stadt" name="city"/>
+            </Box>  
+            <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "5%"
+                    }}>
+            <TextField id="outlined-basic" label="Strasse" name="street" style={{ width: "85%"}}/>
+            <TextField id="outlined-basic" label="Nr."name="houseNumber" style={{ width: "15%"}}/></Box>
+            <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "5%"
+                    }}>
+            <TextField id="outlined-basic" label="PLZ" name="postCityCode" style={{width: "20%"}}/>
+            <TextField id="outlined-basic" label="Stadt" name="city" style={{width: "80%"}}/>
+            </Box>
             </Box>
             <Box sx={{
                 display: "flex",

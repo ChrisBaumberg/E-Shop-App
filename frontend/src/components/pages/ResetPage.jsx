@@ -102,7 +102,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
             >
                 <Typography variant = "h4" sx  ={{marginBottom: "10%"}}>{text}</Typography>
                 <TextField
-                sx={{
+                style={{
 
                     width: "30%",
                     marginBottom: "10%",
@@ -115,7 +115,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
                 defaultValue="email"
                 />
                 <Button
-                sx={{
+                style={{
                     width: "30%",
                     height: "40%",
                     marginBottom:"10%",
@@ -139,7 +139,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
             >
                 <Typography variant= "h4" sx={{marginBottom: "10%"}}>{text}</Typography>
                 <TextField
-                sx={{
+                style={{
                     width: "30%",
                     marginBottom: "10%",
                 }}
@@ -180,7 +180,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
             InputLabelProps={{
                 style: {color: "black"}
             }}
-            sx={{
+            style={{
                 width: "30%",
                 marginBottom: "10%",
             }}
@@ -194,7 +194,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
             <TextField onChange={()=> checkPassword(formRef.current.setEqual)} InputLabelProps={{
                 style: {color: "black"},
             }}
-            sx={{
+            style={{
                 width: "30%",
             
                 marginBottom: "10%",
@@ -207,7 +207,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
             label={equal? "💚 Equal" : "❗Password not equal"}
             />
             <Button
-            sx={{
+            style={{
                 width: "30%",
                 height: "40%",
                 marginBottom: "10%",

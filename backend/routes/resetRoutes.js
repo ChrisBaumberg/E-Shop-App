@@ -2,10 +2,10 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-require("dotenv").config();
 
 
 const User = require("../models/userModel");
+require("dotenv").config();
 const resetRouter = express.Router();
 
 

@@ -58,7 +58,7 @@ export default function LoginBar({isLoggedin}){
             {isLoggedIn?<LogoutIcon 
             
             onClick={handleLogout}
-            sx={{ 
+            style={{ 
                 display: "block",
                 width: "32px",
                 height: "32px",
@@ -73,7 +73,7 @@ export default function LoginBar({isLoggedin}){
           
             <LoginIcon 
             onClick={handleLogin}
-            sx={{
+            style={{
                 display: "block",
                 width: "32px",
                 height: "32px",
@@ -97,7 +97,7 @@ export default function LoginBar({isLoggedin}){
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-            <ShoppingCartIcon sx={{
+            <ShoppingCartIcon style={{
                 display: "block",
                 width: "32px",
                 height: "32px",
@@ -123,7 +123,7 @@ export default function LoginBar({isLoggedin}){
             }}>
             <SettingsIcon
                 onClick={onModalOpen}
-                sx={{
+                style={{
                     display: "block",
                     width: "32px",
                     height: "32px",

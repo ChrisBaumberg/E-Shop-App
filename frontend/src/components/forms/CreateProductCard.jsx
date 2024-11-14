@@ -19,11 +19,12 @@ export default function CreateProductCard(){
     const [size, setSize] = useState();
     const [despositValue, setDespositValue] = useState("");
     const formRef = useRef();
+    const picRef= useRef();
     
     const getProductInput = async ()=>{
         
         const productRef = formRef.current;
-        const productImg = productRef.imgUrl.value;
+        const productImg = productRef.imgUrl.files[0];
         const productTitle= productRef.name.value;
         const productDescription = productRef.description.value;
         const productSizeValue = productRef.sizeValue.value;
@@ -39,15 +40,17 @@ export default function CreateProductCard(){
         setComparePrice(productComparePrice);
         setSize(productSizeIndicator);
         setCategory(productCategory);
-        setPicture(productImg);
+        setPicture(URL.createObjectURL(productImg));
         setDespositValue(productDesposit);
         
     }
     const handleAddClick = (e)=>{
         e.preventDefault();
         getProductInput();
-    }
+        console.log(picture)
 
+        
+    }
   
   
     const VisuallyHiddenInput = styled ("input")({
@@ -73,7 +76,8 @@ export default function CreateProductCard(){
             width: "100%",
             display: "grid",
             gridTemplateColumns: "25% 75%"
-        }}>     
+        }}>   
+        {/* Create Product Form */}  
         <Box 
        component="form"
         ref={formRef}
@@ -93,11 +97,16 @@ export default function CreateProductCard(){
         paddingBottom: "10px"
        }}>
         
-        <Button component="label" style={{color: "black", backgroundColor: "orange"}}
-        startIcon={<CloudUploadIcon/>}>
+        <Button 
+            component="label" 
+            role={undefined}
+            variant="contained"
+            style={{color: "black", backgroundColor: "orange"}}
+            startIcon={<CloudUploadIcon/>}>
             Upload file
-            <VisuallyHiddenInput type="file" name="imgUrl"/>
+            <VisuallyHiddenInput type="file" name="imgUrl" />
         </Button>
+      
         <TextField sx={{
      
         }}
@@ -108,7 +117,7 @@ export default function CreateProductCard(){
         required/>
 
         
-        <TextField sx={{
+        <TextField style={{
        
         }}
         
@@ -129,7 +138,7 @@ export default function CreateProductCard(){
         <TextField label="Größeneinheit" name="sizeIndicator" placeholder="kg/l" required>
         
         </TextField>
-        <TextField sx={{
+        <TextField style={{
       
             
         }}
@@ -153,7 +162,7 @@ export default function CreateProductCard(){
       >
 
       </TextField>
-     <TextField sx={{
+     <TextField style={{
 
       }}
         label = "Pfand"
@@ -172,6 +181,8 @@ export default function CreateProductCard(){
             border: "1px solid black",
             borderRadius: "10px"
         }}>
+        {/* Example Product Card */}
+        {/* Product Picture */}
             <Box sx={{
               
                 backgroundColor: "yellowgreen",
@@ -180,6 +191,7 @@ export default function CreateProductCard(){
             }}>
                 <img src={picture} alt= "Produktbild" style={{height: "420px", width: "420px",}}></img>
             </Box>
+            {/* Product Details */}
             <Box sx={{
                 display: "grid",
                 gridTemplateRows: "20% 10% 20% 10% 40%",
@@ -226,7 +238,7 @@ export default function CreateProductCard(){
             justifyContent: "center",
             marginTop: "10px"
        }}>
-        <Button sx={{
+        <Button style={{
             border: "1px solid black",
             borderRadius: "20px",
             backgroundColor: "green",
@@ -236,7 +248,7 @@ export default function CreateProductCard(){
             width: "230px",
        
         }} onClick={createProduct}>Übernehmen</Button>
-       <Button sx={{
+       <Button style={{
             border: "1px solid black",
             borderRadius: "20px",
             backgroundColor: "green",
@@ -246,7 +258,7 @@ export default function CreateProductCard(){
             width: "230px",
        
         }} onClick={handleAddClick}>Vorschau</Button>
-       <Button type="reset"  sx={{
+       <Button type="reset"  style={{
             border: "1px solid black",
             borderRadius: "20px",
             backgroundColor: "green",

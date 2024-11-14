@@ -54,7 +54,7 @@ export default function Headline({size}){
         </Box>
     
 </Box>
-        <Box sx style={{
+        <Box sx={{
             color: "text.primary",
             backgroundColor: "background.default",
             display: "flex",

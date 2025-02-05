@@ -1,24 +1,23 @@
-import React from "react";
-import { Box } from "@mui/material";
+//import React from "react";
+import { Box } from "@mui/system";
 import { useState, useRef } from "react";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import UploadFileIcon from "@mui/icons-material/UploadFile";
-import showNotifications from "../Notifications/showNotifications";
+import React from "react";
+import showNotification from "../parts/notification/showNotification";
 import { useNavigate } from "react-router-dom";
-
-import {v4 as uuidv4} from "uuid";
 import axios from "axios";
+import {v4 as uuidv4} from "uuid";
+
 
 export default function Register(){
     const [equal, setEqual] = useState(false);
     const formRef = useRef();
     const navigator = useNavigate();
     const handleNavigate = () =>{
-        navigator("/login")
+        navigator("/login");
     }
     const checkPassword = () =>{
-        console.log(formRef.current);
         const form = formRef.current;
         form.password.value === form.confirmPassword.value ? setEqual(true) : setEqual(false);
         
@@ -27,10 +26,10 @@ export default function Register(){
         console.log("Register user...")
         e.preventDefault();
         const form = formRef.current;
-        console.log(form)
+    
         const formData={
             id: uuidv4(),
-            fullname: form.fullname.value,
+            username: form.username.value,
             email: form.email.value,
             password: form.password.value,
             role: "client"
@@ -45,18 +44,18 @@ export default function Register(){
             data: JSON.stringify(formData)
         }
    
-        console.log(formData)
+       
         try{
-      
+            console.log("Trying to register user")
             const resp = await axios(config);
+  
             console.log("Resp Success");
-            showNotifications(`${resp.data.message}`,"normal");
-            //console.log(resp.data.message);
+            showNotification(`${resp.data.message}`,"normal");
+            console.log(resp.data.message);
             handleNavigate();
         }catch(error){
             console.log("Resp Error")
-            console.log(error)
-            showNotifications(`${resp.data.message}`,"normal");
+            showNotification(`${resp.data.message}`,"normal");
             console.log(error.resp.data.message);
         }
         console.log("end register")
@@ -93,11 +92,12 @@ export default function Register(){
                     rowGap: '5%',
                     //border: "1px solid black"
                 }}>
-                    <TextField  required id="outlined-basic" label="fullname"
+                    
+                    <TextField  required id="outlined-basic" label="username"
                     InputLabelProps={{
                         style: { color: 'black' },
                     }}
-                    name= "fullname" variant="standard" />
+                    name= "username" variant="standard" />
                     <TextField required id="outlined-basic" 
                     InputLabelProps={{
                         style: { color: 'black' },
@@ -106,12 +106,7 @@ export default function Register(){
                     <TextField required id="outlined-basic" 
                     InputLabelProps={{
                         style: { color: 'black' },
-                    }}                        
-                    label="username" name="username" variant="standard" />
-                    <TextField required id="outlined-basic" 
-                    InputLabelProps={{
-                        style: { color: 'black' },
-                    }}                        
+                    }}                  
                     label="password"
                     name="password" variant="standard"/>
                     <TextField required

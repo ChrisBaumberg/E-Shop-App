@@ -1,56 +1,58 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const multer = require("multer");
+const bodyParser = require("body-parser");
+const jsonParser=bodyParser.json();
 
 const productRouter = express.Router();
-
-const Post = require("../models/postModel");
-const User = require("../models/userModel");
+require("dotenv").config();
+//models
+const Product = require("../models/productModel");
+/*const User = require("../models/userModel");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) =>{
+        console.log("des.cb:",cb);
         cb(null,"uploads/");
     
     },
     filename: (req, file, cb) => {
+        console.log("file.cb:",cb);
         cb(null, `${Date.now()}-${file.originalname}`);
     },
 
 });
 
-
-const upload = multer({storage});
+const upload = multer({storage});*/
 
 //posts
+productRouter.post("/", jsonParser, async (req,res)=>{
+   
 
-
-
-
-
-
-productRouter.post("/", upload.single("image"), async (req,res)=>{
-    console.log(req);
     const {id, 
         title, 
-        description, productSize, price, size, comparePrice, category, picture} = req.body;
-    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
-    const product = new Post({id, 
+        description, productSize, price, size, comparePrice, category, picture, despositValue} = req.body;
+       /* const token = req.headers.authorization.split(" ")[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        */
+       
+        
+    const product = new Product({id, 
         title, 
-        description, productSize, price, size, comparePrice, category, picture});
+        description, productSize, price, size, comparePrice, category, picture, despositValue});
     try{
-        await Post.create(product);
-        res.status(201).send({message: "Post created!"});
+        await Product.create(product);
+        res.status(201).send({message: "Product created!"});
     }
     catch (error){
-        res.status(500).send({message: "Failed to create Post!"});
+        res.status(500).send({message: "Failed to create Product!"});
     }
 });
 
 productRouter.get("", async(req,res)=>{
     try{
-        const products = await Post.find();
+        const products = await Product.find();
    
         res.status(201).send(products);
     }

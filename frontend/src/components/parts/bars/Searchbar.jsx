@@ -26,7 +26,7 @@ export default function Searchbar(){
         console.log(textInput)
     }
     return(
-        <Box className="search" style={{
+        <Box className="search" sx={{
             position: "relative",
             width: "90%",
             height: "70%",
@@ -35,7 +35,7 @@ export default function Searchbar(){
             borderRadius: "5px"
         }} component="form" ref={searchtextRef}>
             <TextField
-            sx={{
+            style={{
                 width: "89%",
                 height: "10%",
                 backgroundColor: "white",
@@ -51,7 +51,7 @@ export default function Searchbar(){
 
             
             </TextField>
-            <Button onClick={handleOnClick}  sx={{
+            <Button onClick={handleOnClick}  style={{
                 width: "10%",
                 height: "20%",
                 backgroundColor: "orange",

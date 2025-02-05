@@ -2,10 +2,10 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-require("dotenv").config();
 
 
 const User = require("../models/userModel");
+require("dotenv").config();
 const resetRouter = express.Router();
 
 
@@ -30,7 +30,7 @@ resetRouter.post("/", async(req, res)=>{
       const mailMessage={
         from: process.env.EMAIL,
         to: email, 
-        subject: "Reset your with the six digit number",
+        subject: "Reset your password with the six digit number",
         text: `Your reset Code is ${code}`
       };
       transporter.sendMail(mailMessage, (error, info)=>{
@@ -82,4 +82,4 @@ resetRouter.put("/newPassword", async(req, res)=>{
     }
   })
 
-  module.express = resetRouter;
+  module.exports = resetRouter;

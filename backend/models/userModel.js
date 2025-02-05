@@ -3,7 +3,7 @@ const {default: mongoose} = require("mongoose");
 //User Schema
 
 const userSchema = new mongoose.Schema({
-    fullname:{
+    username:{
         type: String,
         required: true,
         minlength: 3,
@@ -24,6 +24,27 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
       },
+      prename: {
+        type: String
+      },
+      familyname:{
+        type: String
+      },
+     
+        street: {
+          type: String
+        },
+        houseNumber: {
+          type: String
+        },
+        cityCode: {
+          type: String,
+          length: 5
+        },
+        city: {
+          type: String
+        },
+     
       role: {
         type: String,
         required: true,

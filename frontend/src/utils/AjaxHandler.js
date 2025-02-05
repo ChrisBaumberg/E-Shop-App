@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import showNotifications from "../components/Notifications/showNotifications";
+import showNotification from "../components/parts/notification/showNotification";
 
 
 export const getProductsFromBackend = async(setProducts) =>{

@@ -11,7 +11,8 @@ const productSchema = new mongoose.Schema({
     size: String,
     comparePrice: String,
     category: String,
-    picture: String
+    picture: String,
+    despositValue: String
 })
 
 const Product= mongoose.model("E-Shop-Products", productSchema);

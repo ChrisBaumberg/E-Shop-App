@@ -1,37 +1,63 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useRef, useState } from "react";
-
+import showNotification from "../parts/notification/showNotification";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Profile(){
-    const [prename, setPrename] = useState();
-    const [familyname, setFamilyname] = useState();
-    const [street, setStreet] = useState();
-    const [houseNumber, setHouseNumber] = useState();
-    const [postCityCode, setPostCityCode] = useState();
-    const [city, setCity] = useState();
-
+    const id = localStorage.getItem("id")
     const formRef = useRef();
+     const navigator = useNavigate();
+        const handleNavigate = () =>{
+            navigator("/");
+        }
 
-    const getUserAdress = async () =>{
+
+    const updateUser = async (e) =>{
+        console.log("Update user...")
+        e.preventDefault();
         const adressRef= formRef.current;
+        const id = localStorage.getItem("id")
         const prename = adressRef.prename.value;
-        const familyname = adressRef.familyname.value;
+        const familyname= adressRef.familyname.value;
         const street = adressRef.street.value;
         const houseNumber = adressRef.houseNumber.value;
-        const cityCode= adressRef.postCityCode.value;
-        const city = adressRef.city.value;
-        setPrename(prename);
-        setFamilyname(familyname);
-        setStreet(street);
-        setHouseNumber(houseNumber);
-        setPostCityCode(cityCode);
-        setCity(city);
-    }
-
-    const handleAddClick = (e) =>{
-        e.preventDefault;
-        getUserAdress();
-        console.log(`Vorname: ${prename}, Nachname: ${familyname}, Straße: ${street} ${houseNumber}, PLZ, Stadt: ${postCityCode} ${city}`)
+        const cityCode = adressRef.postCityCode.value;
+        const city = adressRef.city.value
+        if (!prename||!familyname||!street||!houseNumber||!cityCode||!city){
+            alert("Bitte alle Felder ausfüllen!")
+            
+        }
+        else{
+        const formData={
+            id: id,
+            prename: adressRef.prename.value,
+            familyname: adressRef.familyname.value,
+            street: adressRef.street.value,
+            houseNumber: adressRef.houseNumber.value,
+            cityCode: adressRef.postCityCode.value,
+            city: adressRef.city.value
+        }
+        const config = {
+            url: "http://localhost:3003/api/update",
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify(formData)
+        }
+        try{
+            console.log("Trying to update user");
+            const resp = await axios (config);
+            showNotification(`${resp.data.message}`,"normal");
+            handleNavigate();
+        }
+        catch (error){
+            console.log("Resp Error");
+            showNotification(`${resp.data.message}`, "normal")
+        }
+        console.log("update finished")
+        }
     }
 
     return(
@@ -50,7 +76,11 @@ export default function Profile(){
                 gap: "10px",
                 
                 padding: "10px"
-            }} component="form" ref={formRef}>
+                }}  
+                component="form" 
+                ref={formRef}
+      
+                >
                 <Box
                     sx={{
                         display: "flex",
@@ -82,7 +112,7 @@ export default function Profile(){
                 display: "flex",
                 alignItems:"center", justifyContent:"center"
             }}>
-            <Button onClick={handleAddClick} style={{width: "200px", backgroundColor: "red", textAlign:"center", }}>
+            <Button onClick={(e) => updateUser(e)} style={{width: "200px", backgroundColor: "red", textAlign:"center", }}>
                 Speichern
             
             </Button>

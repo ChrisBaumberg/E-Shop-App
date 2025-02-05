@@ -1,24 +1,23 @@
-import React from "react";
-import { Box } from "@mui/material";
+//import React from "react";
+import { Box } from "@mui/system";
 import { useState, useRef } from "react";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-
-import showNotifications from "../Notifications/showNotifications";
+import React from "react";
+import showNotification from "../parts/notification/showNotification";
 import { useNavigate } from "react-router-dom";
-
-import {v4 as uuidv4} from "uuid";
 import axios from "axios";
+import {v4 as uuidv4} from "uuid";
+
 
 export default function Register(){
     const [equal, setEqual] = useState(false);
     const formRef = useRef();
     const navigator = useNavigate();
     const handleNavigate = () =>{
-        navigator("/login")
+        navigator("/login");
     }
     const checkPassword = () =>{
-        console.log(formRef.current);
         const form = formRef.current;
         form.password.value === form.confirmPassword.value ? setEqual(true) : setEqual(false);
         
@@ -27,7 +26,7 @@ export default function Register(){
         console.log("Register user...")
         e.preventDefault();
         const form = formRef.current;
-        console.log(form)
+    
         const formData={
             id: uuidv4(),
             username: form.username.value,
@@ -45,20 +44,20 @@ export default function Register(){
             data: JSON.stringify(formData)
         }
    
-        console.log(formData)
-        /*try{*/
-      
+       
+        try{
+            console.log("Trying to register user")
             const resp = await axios(config);
+  
             console.log("Resp Success");
-            showNotifications(`${resp.data.message}`,"normal");
+            showNotification(`${resp.data.message}`,"normal");
             console.log(resp.data.message);
             handleNavigate();
-       /* }catch(error){
+        }catch(error){
             console.log("Resp Error")
-            console.log(error)
-            showNotifications(`${resp.data.message}`,"normal");
+            showNotification(`${resp.data.message}`,"normal");
             console.log(error.resp.data.message);
-        }*/
+        }
         console.log("end register")
     }
     return(

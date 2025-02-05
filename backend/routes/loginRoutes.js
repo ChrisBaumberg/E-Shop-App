@@ -1,13 +1,17 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const bodyParser = require("body-parser");
+const jsonParser=bodyParser.json();
 const loginRouter = express.Router();
+const cors = require("cors");
 require("dotenv").config();
 const User =require("../models/userModel");
-
+loginRouter.use(cors());
 //login route to send post request with email and password and check if
-loginRouter.post("/", async(req, res)=>{
+loginRouter.post("/",jsonParser, async(req, res)=>{
+  console.log("LoginRouter")
+  console.log("reqbody: ",req.body)
     const {email, password} = req.body;
     //check if both variables exist
     if (!email||!password){
@@ -18,7 +22,7 @@ loginRouter.post("/", async(req, res)=>{
       return res.status(401).send({message: "User does not exist!"})
     }
   // check if password is correct
-    const isPasswordCorrect = await bcrypt.compare(password, existUser.password)
+    const isPasswordCorrect = await bcrypt.compare(password, existUser.hashPassword)
     if(!isPasswordCorrect){
       return res.status(401).send({message: "Password is incorrect!"})
     }

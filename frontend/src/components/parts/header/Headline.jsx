@@ -2,7 +2,7 @@ import {Box} from "@mui/material";
 import LoginBar from "../bars/LoginBar";
 import Searchbar from "../bars/Searchbar";
 import { Link, useNavigate } from "react-router-dom";
-//import companyLogo from "../../../../public/img/Company-Logo.svg"
+import companyLogo from "../../../../public/img/Logo-Grey.svg"
 
 {/*Headline */}
 
@@ -33,7 +33,7 @@ export default function Headline({size}){
             border: "1px solid black"
         }} >
             
-        <img src = {""} alt={"Firmenlogo"} style={{maxHeight: "50px"}}onClick={handleLogoClick}/>
+        <img /*src = {}*/ alt={"Firmenlogo"} style={{maxHeight: "50px"}}onClick={handleLogoClick}/>
        
     </Box>
     
@@ -59,7 +59,8 @@ export default function Headline({size}){
             backgroundColor: "background.default",
             display: "flex",
             justifyContent: "flex-end",
-            alignItems: "center"
+            alignItems: "center",
+            padding: "10px"
         }}>
             <LoginBar/>
         </Box>

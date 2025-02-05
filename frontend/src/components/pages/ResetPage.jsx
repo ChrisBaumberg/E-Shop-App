@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import showNotifications from "../Notifications/showNotifications";
+import showNotification from "../parts/notification/showNotification";
 
 
 const checkPassword = (formRefCurrent, setEqual) =>{
@@ -27,14 +27,14 @@ const onFormHandleEmail = async(e, formRef, navigator, setResetNumber) =>{
     try{
         const response = await axios(config);
         console.log(response);
-        showNotifications(response.data.message, "normal");
+        showNotification(response.data.message, "normal");
         setResetNumber(response.data.code);
         localStorage.setItem("resetEmail",response.data.token);
         navigator("/reset/verify");
     }
     catch(e){
         console.log(e);
-        showNotifications("Code is incorrect","red");
+        showNotification("Code is incorrect","red");
     }
 }
 
@@ -42,12 +42,12 @@ const onVerifyHandle = (e, formRef, resetNumber, setResetAllowed, navigator) =>{
     e.preventDefault();
     const code = formRef.current.code.value;
     if (code == resetNumber){
-        showNotifications("Code verified","normal");
+        showNotification("Code verified","normal");
         setResetAllowed(true);
         navigator("/reset/newPassword");
     }
     else{
-        showNotifications("Code is incorrect","red");
+        showNotification("Code is incorrect","red");
     }
 }
 
@@ -67,14 +67,14 @@ const onPasswordHandle = async (e, formRef, navigator, emailToken, setEmailToken
     try {
         const response = axios(config);
         console.log(response);
-        showNotifications((await response).data.message,"normal");
+        showNotification((await response).data.message,"normal");
         setEmailToken("");
         localStorage.removeItem("resetEmail");
         navigator("/login");
     }
     catch(e){
         console.log(`Error: ${e}`);
-        showNotifications(e.response.data.message,"red")
+        showNotification(e.response.data.message,"red")
     }
 }
 export default function ResetPage({text, resetAllowed, setResetAllowed, resetNumber, setResetNumber}){
@@ -88,7 +88,7 @@ export default function ResetPage({text, resetAllowed, setResetAllowed, resetNum
         setEmailToken(localStorage.getItem("resetEmail"));
     },[])
     console.log(emailToken);
-    {if (text==="Type in your Email to reset password"){
+    {if (text==="Bitte Email eingeben um das Passwort zurückzusetzen"){
         return(
             <Box ref={formRef} onSubmit={(e)=>onFormHandleEmail(e, formRef, navigator, setResetNumber)} component="form" autoComplete = "off"
             sx={{

@@ -1,10 +1,13 @@
-import { Box,  TextField, InputLabel, MenuItem, Button } from "@mui/material";
+import { Box,  TextField, InputLabel, MenuItem, Button, Checkbox } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {styled} from "@mui/material/styles"
 
 import { useCallback, useRef, useState } from "react";
 import ProductCard from "../parts/cards/ProductCard";
-import { createProduct } from "../../utils/AjaxHandler";
+//import { createProduct } from "../../utils/AjaxHandler";
+import {v4 as uuidv4} from "uuid";
+import axios from "axios";
+import showNotification from "../parts/notification/showNotification";
 
 
 
@@ -18,6 +21,7 @@ export default function CreateProductCard(){
     const [comparePrice, setComparePrice] = useState();
     const [size, setSize] = useState();
     const [despositValue, setDespositValue] = useState("");
+    const [productNumber, setProductNumber] = useState("");
     const formRef = useRef();
     const picRef= useRef();
     
@@ -33,6 +37,7 @@ export default function CreateProductCard(){
         const productSizeIndicator = productRef.sizeIndicator.value;
         const productCategory = productRef.categoryName.value;
         const productDesposit = productRef.despositValue.value;
+        const productNumber = productRef.productNumber.value;
         setTitle(productTitle);
         setDescription(productDescription);
         setProductSize(productSizeValue);
@@ -40,19 +45,40 @@ export default function CreateProductCard(){
         setComparePrice(productComparePrice);
         setSize(productSizeIndicator);
         setCategory(productCategory);
-        setPicture(URL.createObjectURL(productImg));
         setDespositValue(productDesposit);
+        setProductNumber(productNumber);
+        try{
+            console.log("Pic?")
+            setPicture(URL.createObjectURL(productImg));
+            localStorage.setItem("picture",productImg)
+            console.log("Pic:", productImg)
+        }
+        catch{
+            console.log("No Pic")
+            setPicture(null)
+        }
+        setDespositValue(productDesposit);
+        if (productImg != null){
+            localStorage.setItem("picture",productImg)
+            console.log(picture)
+        }
+        else{
+            setPicture(null)
+        }
         
     }
     const handleAddClick = (e)=>{
         e.preventDefault();
+        console.log("Vorschau")
         getProductInput();
-        console.log(picture)
+
 
         
     }
-  
-  
+    
+    const removePicture = ()=>{
+        setPicture(localStorage.removeItem("picture"))
+    }
     const VisuallyHiddenInput = styled ("input")({
         clip: "rect(0 0 0 0)",
         clipPath: "inset(50%)",
@@ -63,7 +89,44 @@ export default function CreateProductCard(){
         left: 0,
         whiteSpace: "nowrap",
         width: 1,
-    });
+    }
+)
+    const registerProduct = async(e) =>{
+        console.log("Register Product")
+        
+        const formData={
+            id: uuidv4(),   //intern
+            picture: picture,
+            title: title,
+            size: size,
+            description: description,
+            productSize: productSize,
+            price: price,
+            category: category, //intern
+            comparePrice: comparePrice,
+            despositValue: despositValue,
+            productNumber: productNumber, //intern
+        }
+        const config = {
+            url: "http://localhost:3003/api/products",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify(formData)
+        }
+        
+        try{
+            console.log("Trying to register Product")
+            const resp = await axios(config);
+            showNotification(`${resp.data.message}`,"normal");
+
+        }
+        catch(error){
+            showNotification(`${resp.data.message}`,"normal")
+        }
+        console.log(formData)
+    }
    
 
     return(
@@ -162,14 +225,24 @@ export default function CreateProductCard(){
       >
 
       </TextField>
+      
      <TextField style={{
 
       }}
+      
         label = "Pfand"
         name="despositValue"
         placeholder="Pfand"
         required></TextField>
-       
+        <TextField style={{
+
+        }}
+        label = "WRIN"
+        name="productNumber"
+        placeholder="WRIN"
+        required
+        >
+            </TextField>
        </Box> 
        {/* Vorschau ProductCard */}
        <Box sx={{
@@ -187,10 +260,14 @@ export default function CreateProductCard(){
               
                 backgroundColor: "yellowgreen",
                 height: "100%",
-                display:"flex", justifyContent: "center", alignItems: "center"
+                display:"grid", justifyContent: "center", alignItems: "center"
             }}>
-                <img src={picture} alt= "Produktbild" style={{height: "420px", width: "420px",}}></img>
+                <img src={picture} alt= "Produktbild" style={{height: "420px", width: "420px",}}></img> 
+                <Button style={{ display: "flex", flexWrap: "wrap", height: "25%",
+                    backgroundColor: "red"
+                }} onClick={removePicture}>Remove Picture</Button>
             </Box>
+            
             {/* Product Details */}
             <Box sx={{
                 display: "grid",
@@ -214,7 +291,7 @@ export default function CreateProductCard(){
                     textAlign: "start"
                 }}>
                     Größe: {productSize}{size}<br/>
-                    <span style={{fontSize:"24px"}}>{price} €</span> <br/>{despositValue? <span style={{fontSize: "12px"}}>Pfand: {despositValue} €</span>:null}<br/>
+                    <span style={{fontSize:"24px"}}>{price} €</span> <br/>{despositValue? <span style={{fontSize: "12px"}}>zzgl. Pfand: {despositValue} €</span>:null}<br/>
                     <span style={{fontSize: "12px"}}>({comparePrice} €/{size})</span>
                     <br/>
                     <span style={{fontSize:"12px"}}>inkl. 19% MwSt., zzgl. Versandkosten</span> {/* optional */}
@@ -247,7 +324,7 @@ export default function CreateProductCard(){
             marginLeft: "5px",
             width: "230px",
        
-        }} onClick={createProduct}>Übernehmen</Button>
+        }} onClick={registerProduct}>Übernehmen</Button>
        <Button style={{
             border: "1px solid black",
             borderRadius: "20px",

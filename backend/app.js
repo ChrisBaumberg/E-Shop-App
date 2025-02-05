@@ -18,10 +18,14 @@ require("dotenv").config();
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
 app.use(async function(req,res,next){
-    console.log("Trying to run DB connection");
+
     await mongoose.connect(process.env.CONNECT_STRING);
     console.log("Running DB connection");
     next();
+});
+
+app.listen(PORT,()=>{
+    console.log(`Running on Port ${PORT}`);
 });
 
 //test routes
@@ -39,6 +43,3 @@ app.use("/api/login", loginRouter);
 //reset routes
 app.use("/api/reset", resetRouter);
 
-app.listen(PORT,()=>{
-    console.log(`Running on Port ${PORT}`);
-});

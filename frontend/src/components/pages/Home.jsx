@@ -7,6 +7,7 @@ import { getProductsFromBackend } from "../../utils/AjaxHandler";
 
 export function Home(){
     const [products, setProducts] = useState([])
+ 
     useEffect(()=>{
         getProductsFromBackend(setProducts);
     },[])
@@ -46,11 +47,14 @@ export function Home(){
                         
                     }}>{ products.map((product)=>{
                         return( <Fragment key={product.id}>
-                    <ProductCard title={title} imageUrl={productPicture} description={description} price={price} category={category} size={size} productSize={productSize} comparePrice={comparePrice}/>
+                    <ProductCard title={product.title} imageUrl={product.picture} description={product.description} price={product.price} category={product.category} size={product.size} productSize={product.productSize} comparePrice={product.comparePrice} style={{
+                        
+                    }}/>
                     </Fragment>
                         )
                     })
                 }
+                
                     </Box>
                 </Grid>
                 {/*</Grid>*/}

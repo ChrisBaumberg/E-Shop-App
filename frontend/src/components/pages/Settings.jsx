@@ -31,7 +31,7 @@ export default function Settings({settingsOpen, setSettingsOpen, isLoggedIn}){
             p:4
         }}>
                 {isLoggedIn?null: <Button onClick={handleOnRegister} style={{width: "100%", margin: "5px", backgroundColor: "red", color: "yellow"}}>Register</Button>}
-                <Button onClick={handleOnProfile} style={{ width: "100%", margin: "5px",backgroundColor: "red", color: "yellow"}}>Profile</Button>
+                {isLoggedIn?<Button onClick={handleOnProfile} style={{ width: "100%", margin: "5px",backgroundColor: "red", color: "yellow"}}>Profile</Button>:null}
         </Box>
         </Modal>
     )

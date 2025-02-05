@@ -12,22 +12,44 @@ import Settings from "../../pages/Settings";
 export default function LoginBar({isLoggedin}){
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
+    const [username, setUsername] = useState([]);
+    const [role, setRole] = useState("");
+    const [admin, setAdmin]= useState("");
     const onModalOpen = () => setSettingsOpen(!settingsOpen);
     const navigator = useNavigate();
-
+    
     useEffect(()=>{
+        
         const token = localStorage.getItem("token");
+        
+        
         if (token){
           setLoggedIn(true);
+          setUsername(localStorage.getItem("username"));
+          setRole(localStorage.getItem("role"));
         }
+        if (role == "admin"){
+            setAdmin("*");
+          
+        }
+        
       },[])
-      const handleLogout = () =>{
+    
+
+    const handleLogout = () =>{
+        localStorage.clear();
         setLoggedIn(false);
         console.log("Logged out")
       }
+
       const handleLogin = () =>{
         navigator("/login")
+        
+      
       }
+    
+    
+      
     return(
         <>
         
@@ -55,7 +77,21 @@ export default function LoginBar({isLoggedin}){
             }}>
                 
             
-            {isLoggedIn?<LogoutIcon 
+            {isLoggedIn?
+            <>
+            <div style={{
+                height: "50px",
+                marginRight: "20px",
+                backgroundColor: "yellowgreen",
+                display:"flex",
+                borderRadius: "50%",
+                justifyContent:"center", 
+                alignItems:"center"
+                
+            }}><span style={{display: "flex",border: "1px solid black",
+                borderRadius : "50%",height:"100%", justifyContent:"center", alignItems:"center" }}>{username}</span><span style={{backgroundColor: "red", borderRadius : "50%"}}>{admin}</span></div>
+            
+            <LogoutIcon 
             
             onClick={handleLogout}
             style={{ 
@@ -69,7 +105,7 @@ export default function LoginBar({isLoggedin}){
                 borderRadius: "30%",
                 backgroundColor: "red",
                 cursor: "pointer"
-            }}/>:
+            }}/></>:
           
             <LoginIcon 
             onClick={handleLogin}
@@ -139,7 +175,7 @@ export default function LoginBar({isLoggedin}){
             </div>
         </Box>
         {settingsOpen?(
-            <Settings settingsOpen={settingsOpen} setSettingsOpen={setSettingsOpen} isLoggedIn={isLoggedIn}></Settings>
+            <Settings settingsOpen={settingsOpen} setSettingsOpen={setSettingsOpen} isLoggedIn={isLoggedIn}/>
         ):null}
         </>
     )

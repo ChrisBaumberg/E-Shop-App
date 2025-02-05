@@ -11,6 +11,10 @@ export default function AdminPage(){
            e.preventDefault();
             navigate("/newproduct")
         }
+    const handleOnDelete = (e)=>{
+        e.preventDefault();
+        navigate("/deleteproduct")
+    }
         
     return(
         <Box sx={{

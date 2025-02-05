@@ -11,6 +11,7 @@ const registerRouter = require("./routes/registerRoutes");
 const loginRouter = require("./routes/loginRoutes");
 const resetRouter = require("./routes/resetRoutes");
 const testRouter = require("./routes/testRoutes");
+const updateRouter = require("./routes/updateRoutes");
 const PORT = process.env.PORT;
 require("dotenv").config();
 
@@ -42,4 +43,7 @@ app.use("/api/login", loginRouter);
 
 //reset routes
 app.use("/api/reset", resetRouter);
+
+//update routes
+app.use("/api/update", updateRouter)
 

@@ -10,8 +10,7 @@ const User =require("../models/userModel");
 loginRouter.use(cors());
 //login route to send post request with email and password and check if
 loginRouter.post("/",jsonParser, async(req, res)=>{
-  console.log("LoginRouter")
-  console.log("reqbody: ",req.body)
+  
     const {email, password} = req.body;
     //check if both variables exist
     if (!email||!password){
@@ -28,7 +27,13 @@ loginRouter.post("/",jsonParser, async(req, res)=>{
     }
   //create jwt token
     const token=jwt.sign({id: existUser.id}, process.env.JWT_SECRET);
-    res.status(200).send({token, message: "Login successfull"});
+    const user = await User.findOne({email});
+    const id = user.id;
+    const username = user.username;
+    const role = user.role;
+    res.status(200).send({token, id, username, role, message: "Login successfull"});
+    
+  
   })
 
   module.exports = loginRouter;

@@ -25,6 +25,12 @@ registerRouter.post("/",limiter,jsonParser, async (req, res)=>{
       //Daten extrathieren - destructering
 
       const { id, username, email, password, role } = req.body;
+      const prename  = "";
+      const familyname = "";
+      const street = "";
+      const houseNumber = "";
+      const cityCode = "";
+      const city = "";
       console.log("Alles ausgefüllt?");
       if ( !id|| !username|| !email|| !password|| !role){
         return res.status(404).send({message: "Please fill out all fields"});
@@ -41,7 +47,7 @@ registerRouter.post("/",limiter,jsonParser, async (req, res)=>{
       console.log("hashPassword")
       const hashPassword = await bcrypt.hash(password, 10);
       console.log("UserSchema")
-      const user = new User({id, username, email, hashPassword, role});
+      const user = new User({id, username, email, hashPassword, role, prename, familyname, street, houseNumber, cityCode, city});
       
       await User.create(user);
       res.status(201).send({message: "User successfully created!"});

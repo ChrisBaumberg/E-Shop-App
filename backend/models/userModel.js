@@ -24,6 +24,27 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
       },
+      prename: {
+        type: String
+      },
+      familyname:{
+        type: String
+      },
+     
+        street: {
+          type: String
+        },
+        houseNumber: {
+          type: String
+        },
+        cityCode: {
+          type: String,
+          length: 5
+        },
+        city: {
+          type: String
+        },
+     
       role: {
         type: String,
         required: true,
